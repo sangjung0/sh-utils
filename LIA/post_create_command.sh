@@ -20,7 +20,6 @@ fi
 
 echo "[INFO] step 1/3: change ownership to ${CONTAINER_USER}"
 bash "${CONTAINER_WORK_DIR}/.devcontainer/sh-utils/change_owner.sh" "${CONTAINER_USER}" \
-bash "${CONTAINER_WORK_DIR}/.devcontainer/sh-utils/change_owner.sh" "${CONTAINER_USER}" \
     --target "${CONTAINER_HOME}" \
     --target "${CONTAINER_WORK_DIR}:${CONTAINER_WORK_DIR}/.datasets" \
     --target "${CONTAINER_WORK_DIR}/.datasets:${CONTAINER_WORK_DIR}/.datasets/pills:${CONTAINER_WORK_DIR}/.datasets/ILSVRC:${CONTAINER_WORK_DIR}/.datasets/asr-rankformer-datasets"
