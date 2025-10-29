@@ -3,7 +3,7 @@ set -euo pipefail
 
 # args: <username> <uid>
 if [[ $# -lt 2 ]]; then
-    echo "Usage: $0 <username> <uid>" >&2
+    echo "Usage: $0 <username> <uid> <home>" >&2
     exit 1
 fi
 
