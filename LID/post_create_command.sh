@@ -4,7 +4,6 @@ set -euo pipefail
 CONTAINER_USER="${1:-$CONTAINER_USER}"
 CONTAINER_HOME="${2:-$CONTAINER_HOME}"
 CONTAINER_WORK_DIR="${3:-$CONTAINER_WORK_DIR}"
-CONTAINER_UV_GROUP="${4:-$CONTAINER_UV_GROUP}"
 
 if ! id "${CONTAINER_USER}" &>/dev/null; then
     echo "User ${CONTAINER_USER} does not exist" >&2
@@ -25,9 +24,8 @@ bash "${CONTAINER_WORK_DIR}/.devcontainer/sjsh/change_owner.sh" "${CONTAINER_USE
     --target "${CONTAINER_WORK_DIR}/.datasets:${CONTAINER_WORK_DIR}/.datasets/pills:${CONTAINER_WORK_DIR}/.datasets/ILSVRC:${CONTAINER_WORK_DIR}/.datasets/asr-rankformer-datasets"
 
 echo "[INFO] step 2/3: sync uv"
-bash "${CONTAINER_WORK_DIR}/.devcontainer/sjsh/wait_for_dir.sh" "${CONTAINER_WORK_DIR}/.venv"
-bash "${CONTAINER_WORK_DIR}/.devcontainer/sjsh/sync_uv.sh" "${CONTAINER_WORK_DIR}" "${CONTAINER_HOME}" "${CONTAINER_UV_GROUP}"
-
+cd "${CONTAINER_WORK_DIR}" && uv sync
 
 echo "[INFO] step 3/3: setup lhotse"
 bash "${CONTAINER_WORK_DIR}/.devcontainer/sjsh/LIA/setup_lhotse.sh" "${CONTAINER_WORK_DIR}"
+
